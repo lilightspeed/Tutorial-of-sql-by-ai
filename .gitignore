@@ -1,0 +1,19 @@
+# 环境变量（敏感信息）
+.env
+
+# SQL 教程源文件（纯 SQL 版本，仅保留 Notebook 版本）
+sql_tutorials/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Jupyter
+.ipynb_checkpoints/
+
+# VS Code
+.vscode/
+
+# Claude Code
+.claude/

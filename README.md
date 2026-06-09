@@ -11,6 +11,8 @@
 
 ## 📋 目录
 
+### 基础篇
+
 | 章节 | 文件 | 内容概要 |
 |------|------|----------|
 | 准备篇 | [00_环境准备.ipynb](00_环境准备.ipynb) | 安装 MySQL、Python 环境配置、创建示例数据库 |
@@ -27,25 +29,57 @@
 | 第11章 | [11_事务与并发控制.ipynb](11_事务与并发控制.ipynb) | ACID、事务控制、隔离级别 |
 | 第12章 | [12_综合实战.ipynb](12_综合实战.ipynb) | 综合练习题、真实场景分析 |
 
+### 进阶篇
+
+| 章节 | 文件 | 内容概要 |
+|------|------|----------|
+| 进阶1 | [进阶教程/A01_窗口函数.ipynb](进阶教程/A01_窗口函数.ipynb) | ROW_NUMBER、RANK、DENSE_RANK、LAG/LEAD |
+| 进阶2 | [进阶教程/A02_CTE公用表表达式.ipynb](进阶教程/A02_CTE公用表表达式.ipynb) | WITH 子句、递归 CTE |
+| 进阶3 | [进阶教程/A03_高级JOIN技巧.ipynb](进阶教程/A03_高级JOIN技巧.ipynb) | CROSS JOIN、自连接、UNION |
+| 进阶4 | [进阶教程/A04_高级子查询.ipynb](进阶教程/A04_高级子查询.ipynb) | 派生表、相关子查询优化 |
+| 进阶5 | [进阶教程/A05_性能优化与执行计划.ipynb](进阶教程/A05_性能优化与执行计划.ipynb) | EXPLAIN、索引优化、慢查询分析 |
+| 进阶6 | [进阶教程/A06_高级数据操作.ipynb](进阶教程/A06_高级数据操作.ipynb) | INSERT INTO SELECT、MERGE、批量操作 |
+| 进阶7 | [进阶教程/A07_JSON数据操作.ipynb](进阶教程/A07_JSON数据操作.ipynb) | JSON 函数、JSON 字段查询 |
+| 进阶8 | [进阶教程/A08_存储过程高级特性.ipynb](进阶教程/A08_存储过程高级特性.ipynb) | 游标、异常处理、动态 SQL |
+| 进阶9 | [进阶教程/A09_数据库设计与范式.ipynb](进阶教程/A09_数据库设计与范式.ipynb) | 三大范式、反范式设计、ER 建模 |
+| 进阶10 | [进阶教程/A10_综合实战.ipynb](进阶教程/A10_综合实战.ipynb) | 进阶综合练习、真实场景分析 |
+
 ## 🚀 快速开始
 
-### 1. 安装依赖
+### 1. 克隆项目
 
 ```bash
-pip install pymysql pandas jupyter
+git clone https://github.com/lilightspeed/Tutorial-of-sql-by-ai.git
+cd Tutorial-of-sql-by-ai
 ```
 
-### 2. 安装 MySQL
+### 2. 创建 conda 环境并安装依赖
 
-请参考 [00_环境准备.ipynb](00_环境准备.ipynb) 中的详细安装指南。
+```bash
+conda create -n learn python=3.13
+conda activate learn
+pip install pymysql pandas python-dotenv jupyter
+```
 
-### 3. 初始化示例数据库
+### 3. 配置数据库密码
+
+在项目根目录创建 `.env` 文件，写入你的 MySQL 密码：
+
+```
+MYSQL_PASSWORD=你的MySQL密码
+```
+
+> ⚠️ `.env` 文件已被 `.gitignore` 忽略，不会被提交到 Git。
+
+### 4. 初始化示例数据库
 
 ```bash
 python setup_database.py
 ```
 
-### 4. 启动 Jupyter
+该脚本会创建 `shop_db` 数据库，并填充示例数据（商品、客户、订单等）。
+
+### 5. 启动 Jupyter
 
 ```bash
 jupyter notebook
@@ -70,6 +104,15 @@ customers (客户) ──┐
 employees (员工) ──┘                          │
                                           products (商品) ──── categories (分类)
 ```
+
+| 表名 | 说明 | 主要字段 |
+|------|------|----------|
+| categories | 商品分类 | category_id, category_name |
+| products | 商品 | product_id, product_name, price, stock |
+| customers | 客户 | customer_id, customer_name, city |
+| employees | 员工 | employee_id, employee_name, department, manager_id |
+| orders | 订单 | order_id, customer_id, employee_id, total_amount |
+| order_items | 订单明细 | item_id, order_id, product_id, quantity, unit_price |
 
 ## 📝 许可
 
